@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -9,7 +8,6 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      home: ,
     );
   }
 }
