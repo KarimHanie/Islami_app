@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Sebhah extends StatefulWidget {
@@ -6,8 +8,10 @@ class Sebhah extends StatefulWidget {
 }
 
 class _SebhahState extends State<Sebhah> {
-  int counter=0,result=0,i=0;
-  List<String> tsbehat=['سبحان الله','الحمد الله','الله أكبر'];
+  int counter = 0, result = 0, i = 0;
+  double _angle = 0.0; // Initial angle
+
+  List<String> tsbehat = ['سبحان الله', 'الحمد الله', 'الله أكبر'];
 
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -25,12 +29,12 @@ class _SebhahState extends State<Sebhah> {
                   Image.asset('assets/images/head_sebha_logo.png'),
                   GestureDetector(
                       onTap: () => {
-                        increaseNumber()
-                      },
-                      child: AnimatedRotation(
-                          duration: const Duration(seconds: 1),
-                          turns: 0.25,
-                          child: Image.asset('assets/images/body of seb7a.png'))),
+                            increaseNumber(),
+                          },
+                      child: Transform.rotate(
+                        angle: _angle,
+                          child:
+                              Image.asset('assets/images/body of seb7a.png'))),
                 ],
               ),
             ),
@@ -73,7 +77,10 @@ class _SebhahState extends State<Sebhah> {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text('${tsbehat[i]}',
-                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(color:Colors.white)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(color: Colors.white)),
                       )),
                 ),
               ],
@@ -84,17 +91,19 @@ class _SebhahState extends State<Sebhah> {
     );
   }
 
-  void increaseNumber(){
+  void increaseNumber() {
     counter++;
     result++;
-    if(33==counter){
-      counter=0;
+    if (33 == counter) {
+      counter = 0;
       i++;
-      if(i==3){
-        i=0;
+      if (i == 3) {
+        i = 0;
       }
     }
-    setState(() {});
 
+    setState(() {
+      _angle += pi / 2; // Rotate 90 degrees
+    });
   }
 }
