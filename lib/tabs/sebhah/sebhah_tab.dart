@@ -78,7 +78,7 @@ class _SebhahState extends State<Sebhah> {
                         child: Text('${tsbehat[i]}',
                             style: Theme.of(context).textTheme.headlineSmall?.copyWith(color:Colors.white)),
                       )),
-                ),
+                ),git
               ],
             )
           ],
