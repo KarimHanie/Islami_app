@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Sebhah extends StatefulWidget {
@@ -7,6 +9,8 @@ class Sebhah extends StatefulWidget {
 
 class _SebhahState extends State<Sebhah> {
   int counter=0,result=0,i=0;
+  double _angle = 0.0; // Initial angle
+
   List<String> tsbehat=['سبحان الله','الحمد الله','الله أكبر'];
 
   Widget build(BuildContext context) {
@@ -27,9 +31,8 @@ class _SebhahState extends State<Sebhah> {
                       onTap: () => {
                         increaseNumber()
                       },
-                      child: AnimatedRotation(
-                          duration: const Duration(seconds: 1),
-                          turns: 0.25,
+                      child: Transform.rotate(
+                          angle: _angle,
                           child: Image.asset('assets/images/body of seb7a.png'))),
                 ],
               ),
@@ -94,6 +97,8 @@ class _SebhahState extends State<Sebhah> {
         i=0;
       }
     }
+    _angle += pi / 2; // Rotate 90 degrees
+
     setState(() {});
 
   }
