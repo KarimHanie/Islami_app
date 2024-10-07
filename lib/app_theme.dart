@@ -29,6 +29,10 @@ class AppTheme {
           color: Colors.black,
         ),
     ),
+    iconTheme: IconThemeData(
+      color: AppTheme.lightPrimary,
+      size: 30,
+    ),
   );
   static ThemeData dartTheme = ThemeData(
     primaryColor: darkPrimary,
