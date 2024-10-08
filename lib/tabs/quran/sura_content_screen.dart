@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:islami/app_theme.dart';
+import 'package:islami/tabs/LoadingScreen/loading_indecator.dart';
 import 'package:islami/tabs/quran/quran.dart';
 
-class SuraContent extends StatelessWidget {
+class SuraContent extends StatefulWidget {
   static const String routeName = '/suraContent';
-  List<String> ayat = [
-    "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
-    'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
-    'الرَّحْمَنِ الرَّحِيمِ',
-    'مَالِكِ يَوْمِ الدِّينِ',
-    'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِين',
-    'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
-    ' صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّين',
-  ];
+
+  @override
+  State<SuraContent> createState() => _SuraContentState();
+}
+
+class _SuraContentState extends State<SuraContent> {
+  List<String> ayat = [];
+
   late SuraArgs args;
+
   @override
   Widget build(BuildContext context) {
-     args=ModalRoute.of(context)!.settings.arguments as SuraArgs;
-     loadSuraFile();
+    args = ModalRoute.of(context)!.settings.arguments as SuraArgs;
+    if (ayat.isEmpty) {
+      loadSuraFile();
+    }
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -29,9 +33,11 @@ class SuraContent extends StatelessWidget {
         appBar: AppBar(
           title: Text('${args.suraNAme}'),
         ),
-        body: Container(
-            padding: EdgeInsets.all(25),
-          margin: EdgeInsets.symmetric(horizontal:24 ,vertical: MediaQuery.sizeOf(context).height*0.07),
+        body: (ayat.isNotEmpty)?Container(
+          padding: EdgeInsets.all(25),
+          margin: EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: MediaQuery.sizeOf(context).height * 0.07),
           decoration: BoxDecoration(
             color: AppTheme.white.withOpacity(0.85),
             borderRadius: BorderRadius.circular(25),
@@ -46,13 +52,16 @@ class SuraContent extends StatelessWidget {
             ),
             itemCount: ayat.length,
           ),
-        ),
+        ):LoadingIndecator(),
       ),
-    );
+    ) ;
   }
-  void loadSuraFile (){
-    print(args.suraNAme);
-    print(args.index);
 
-}
+  Future<void> loadSuraFile() async {
+    // rootBundle used to deal with assets
+    String sura =
+        await rootBundle.loadString('assets/text/${args.index + 1}.txt');
+    ayat = sura.split('\r\n');
+    setState(() {});
+  }
 }
