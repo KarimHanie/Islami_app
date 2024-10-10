@@ -128,6 +128,28 @@ class Quran extends StatelessWidget {
           'assets/images/qur2an_screen_logo.png',
           height: MediaQuery.sizeOf(context).height * 0.28,
         ),
+        Divider(color: Theme.of(context).primaryColor, thickness: 3),
+        IntrinsicHeight(
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Text('عدد الايات',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(color: Theme.of(context).primaryColor)),
+            VerticalDivider(
+              color: Theme.of(context).primaryColor,
+              thickness: 3,
+              width: 0,
+            ),
+            Text('عدد الايات',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(color: Theme.of(context).primaryColor)),
+          ]),
+        ),
+        Divider(color: Theme.of(context).primaryColor, thickness: 3),
         Expanded(
             child: ListView.separated(
           itemBuilder: (_, index) => GestureDetector(
@@ -135,10 +157,32 @@ class Quran extends StatelessWidget {
               SuraContent.routeName,
               arguments: SuraArgs(suraNAme: suraName[index], index: index),
             ),
-            child: Text(
-              suraName[index],
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
+            child: IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                      width: MediaQuery.sizeOf(context).width * 0.3,
+                      child: Text(
+                        suraName[index].length.toString(),
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        textAlign: TextAlign.center,
+                      )),
+                  VerticalDivider(
+                    color: Theme.of(context).primaryColor,
+                    thickness: 3,
+                    width: 0,
+                  ),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width * 0.3,
+                    child: Text(
+                      suraName[index].trim(),
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           itemCount: suraName.length,
