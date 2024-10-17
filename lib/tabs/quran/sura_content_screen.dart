@@ -3,6 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:islami/app_theme.dart';
 import 'package:islami/tabs/LoadingScreen/loading_indecator.dart';
 import 'package:islami/tabs/quran/quran.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import '../settings/settings_provider.dart';
 
 class SuraContent extends StatefulWidget {
   static const String routeName = '/suraContent';
@@ -18,6 +22,7 @@ class _SuraContentState extends State<SuraContent> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider=Provider.of<SettingsProvider>(context);
     args = ModalRoute.of(context)!.settings.arguments as SuraArgs;
     if (ayat.isEmpty) {
       loadSuraFile();
@@ -26,7 +31,7 @@ class _SuraContentState extends State<SuraContent> {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage('assets/images/default_bg.png'),
+          image: AssetImage('${Provider.of<SettingsProvider>(context).backGroundImageName}.png'),
         ),
       ),
       child: Scaffold(
@@ -39,7 +44,7 @@ class _SuraContentState extends State<SuraContent> {
               horizontal: 24,
               vertical: MediaQuery.sizeOf(context).height * 0.07),
           decoration: BoxDecoration(
-            color: AppTheme.white.withOpacity(0.85),
+            color: settingsProvider.isDark?AppTheme.darkPrimary:AppTheme.white,
             borderRadius: BorderRadius.circular(25),
           ),
           child: ListView.builder(

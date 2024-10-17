@@ -1,0 +1,3 @@
+arb-dir: lib/l10n  #file extension like json
+template-arb-file: app_en.arb #tempelates for the language
+output-localization-file: app_localizations.dart

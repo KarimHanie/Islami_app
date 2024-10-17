@@ -21,13 +21,13 @@ class AppTheme {
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.white),
     textTheme: TextTheme(
-        headlineSmall: TextStyle(
-            fontSize: 25, fontWeight: FontWeight.w400, color: Colors.black),
-        titleLarge:TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w400,
-          color: Colors.black,
-        ),
+      headlineSmall: TextStyle(
+          fontSize: 25, fontWeight: FontWeight.w400, color: Colors.black),
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
     ),
     iconTheme: IconThemeData(
       color: AppTheme.lightPrimary,
@@ -36,5 +36,30 @@ class AppTheme {
   );
   static ThemeData dartTheme = ThemeData(
     primaryColor: darkPrimary,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.transparent,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+          fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+    ),
+    scaffoldBackgroundColor: Colors.transparent,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: darkPrimary,
+        selectedItemColor: gold,
+        unselectedItemColor: Colors.white),
+    textTheme: TextTheme(
+      headlineSmall: TextStyle(
+          fontSize: 25, fontWeight: FontWeight.w400, color: white),
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: gold,
+      ),
+    ),
+    iconTheme: IconThemeData(
+      color: AppTheme.lightPrimary,
+      size: 30,
+    ),
   );
 }
